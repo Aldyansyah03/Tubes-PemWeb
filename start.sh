@@ -21,7 +21,9 @@ if php artisan migrate --force; then
   echo "✓ Migrations completed."
 else
   echo "⚠ Warning: migrations failed; continuing to start web server." >&2
-fi# Clear all caches
+fi
+
+# Clear all caches
 echo "Clearing caches..."
 php artisan config:clear || true
 php artisan cache:clear || true
