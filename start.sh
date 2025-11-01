@@ -19,6 +19,14 @@ chmod -R 775 storage bootstrap/cache || true
 echo "Running migrations..."
 if php artisan migrate --force; then
   echo "✓ Migrations completed."
+  
+  # Run seeders to create initial users (admin, doctors, patients)
+  echo "Running database seeders..."
+  if php artisan db:seed --force; then
+    echo "✓ Database seeded successfully."
+  else
+    echo "⚠ Warning: seeding failed or already seeded." >&2
+  fi
 else
   echo "⚠ Warning: migrations failed; continuing to start web server." >&2
 fi
